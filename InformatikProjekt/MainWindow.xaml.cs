@@ -55,9 +55,12 @@ namespace InformatikProjekt
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Top
             };
-            this.Content = Punktebox;
+            Punktebox.Background = new SolidColorBrush(Colors.LightBlue);
+            Canvas.SetLeft(Punktebox, w / 2 - 100);
+            MyCanvas.Children.Add(Punktebox);
+            
         }
-
+            
         private void startGame()
         {
             gameTimer.Start();
