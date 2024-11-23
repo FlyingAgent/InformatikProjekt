@@ -153,8 +153,6 @@ namespace InformatikProjekt
                 {
                     awaitedIndex = 0;
                 }
-
-
             } else
             {
                 MessageBox.Show("Nö du huen");
