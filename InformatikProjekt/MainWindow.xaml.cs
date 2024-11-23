@@ -14,6 +14,7 @@ using System.Windows.Threading;
 using System.Diagnostics;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Converters;
+using System.Security.Cryptography.X509Certificates;
 
 namespace InformatikProjekt
 {
@@ -29,7 +30,9 @@ namespace InformatikProjekt
         public double w = 1000;
         public double h = 1000;
         public int time = 1000;
-        public double scale = 0.1;
+        public double scale = 0.3;
+        public TextBox Punktebox;
+        public int Punkte = 0;
 
         public MainWindow()
         {
@@ -39,14 +42,27 @@ namespace InformatikProjekt
             gameTimer.Interval = TimeSpan.FromMilliseconds(time + 16.66);
             startGame();
 
+            this.Background = new SolidColorBrush(Colors.Green);
             this.Width = w;
             this.Height = h;
+
+            //einbauen der Punkte
+            Punktebox = new TextBox
+            {
+                Width = 200,
+                Height = 30,
+                Text = $"Punkte: {Punkte}",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Top
+            };
+            this.Content = Punktebox;
         }
 
         private void startGame()
         {
             gameTimer.Start();
         }
+
 
 
         private async void gameEngine(object sender, EventArgs e)
@@ -88,7 +104,7 @@ namespace InformatikProjekt
             // Erstelle eine BitmapImage-Quelle
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri("C:/Users/joost/Downloads/IMG20231211194334.jpg", UriKind.Absolute); // Absoluter oder relativer Pfad
+            bitmap.UriSource = new Uri("C:/Users/david/OneDrive/Bilder/IMG-20231002-WA0005.jpg", UriKind.Absolute); // Absoluter oder relativer Pfad
             bitmap.EndInit();
 
             // Weise die Quelle dem Image-Steuerelement zu
@@ -141,19 +157,23 @@ namespace InformatikProjekt
             double x = Canvas.GetLeft(img);
             double y = Canvas.GetTop(img);
             Rect imageBounds = new Rect(x, y, img.Width, img.Height);
+            
 
             if ((clickPosition.X > imageBounds.X && clickPosition.X < imageBounds.X + bilder[awaitedIndex].w) && (clickPosition.Y > imageBounds.Y && clickPosition.Y < imageBounds.Y + bilder[awaitedIndex].h))
             {
                 Debug.WriteLine("Yapp");
                 bilder[awaitedIndex].gotClicked = true;
                 if (awaitedIndex + 1 < bilder.Count)
+                
                 {
                     awaitedIndex++;
-                } else
+                } 
+                else
                 {
                     awaitedIndex = 0;
                 }
-            } else
+            } 
+            else
             {
                 MessageBox.Show("Nö du huen");
                 gameTimer.Stop();
