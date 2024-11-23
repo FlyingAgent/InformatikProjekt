@@ -112,33 +112,73 @@ namespace InformatikProjekt
             MyCanvas.Children.Remove(i);
         }
 
-
+        public int awaitedIndex = 0;
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Get the position of the mouse click relative to the Canvas
             Point clickPosition = e.GetPosition(MyCanvas);
+            int index = 0;
 
-            bilder.ForEach(image =>
+            //bilder.ForEach(image =>
+            //{
+            //    // Check if the click is within the bounds of this image
+            //    Image img = image.Image;
+            //    double x = Canvas.GetLeft(img);
+            //    double y = Canvas.GetTop(img);
+            //    Rect imageBounds = new Rect(x, y, img.Width, img.Height);
+
+            //    if((clickPosition.X > imageBounds.X && clickPosition.X < imageBounds.X + image.w) && (clickPosition.Y > imageBounds.Y && clickPosition.Y < imageBounds.Y + image.h))
+            //    {
+            //        Debug.WriteLine("Yapp");
+            //        image.gotClicked = true;    
+            //    }
+
+            //    //Debug.WriteLine($"X: {imageBounds.X}, Y: {imageBounds.Y}, W: {image.w} H: {image.h} --> ClickX: {clickPosition.X} ClickY: {clickPosition.Y}");
+            //});
+
+
+            Image img = bilder[awaitedIndex].Image;
+            double x = Canvas.GetLeft(img);
+            double y = Canvas.GetTop(img);
+            Rect imageBounds = new Rect(x, y, img.Width, img.Height);
+
+            if ((clickPosition.X > imageBounds.X && clickPosition.X < imageBounds.X + bilder[awaitedIndex].w) && (clickPosition.Y > imageBounds.Y && clickPosition.Y < imageBounds.Y + bilder[awaitedIndex].h))
             {
-                // Check if the click is within the bounds of this image
-                Image img = image.Image;
-                double x = Canvas.GetLeft(img);
-                double y = Canvas.GetTop(img);
-                Rect imageBounds = new Rect(x, y, img.Width, img.Height);
-               
-                if((clickPosition.X > imageBounds.X && clickPosition.X < imageBounds.X + image.w) && (clickPosition.Y > imageBounds.Y && clickPosition.Y < imageBounds.Y + image.h))
+                Debug.WriteLine("Yapp");
+                bilder[awaitedIndex].gotClicked = true;
+                if (awaitedIndex + 1 < bilder.Count)
                 {
-                    Debug.WriteLine("Yapp");
-                    image.gotClicked = true;    
+                    awaitedIndex++;
+                } else
+                {
+                    awaitedIndex = 0;
                 }
 
-                //Debug.WriteLine($"X: {imageBounds.X}, Y: {imageBounds.Y}, W: {image.w} H: {image.h} --> ClickX: {clickPosition.X} ClickY: {clickPosition.Y}");
-            });
-            //hurensohn123
 
+            } else
+            {
+                MessageBox.Show("Nö du huen");
+                gameTimer.Stop();
+            }
         }
 
-        
+        public int listForIndex(List<Bild> liste)
+        {
+            int index = 0;
+            int outPutIndex = 0;
+
+            liste.ForEach(b =>
+            {
+                 index++;
+                 if (b.gotClicked == true)
+                 {
+                     outPutIndex = index;
+                 }
+            });
+
+            return outPutIndex;
+        }
+
     }
 
     public class Bild
