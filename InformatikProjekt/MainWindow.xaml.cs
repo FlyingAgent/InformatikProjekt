@@ -62,6 +62,7 @@ namespace InformatikProjekt
 
             if (allPicturesClicked == true)
             {
+                //Bild spawnen
                 bilder.ForEach(b =>
                 {
                     b.gotClicked = false;
@@ -117,25 +118,6 @@ namespace InformatikProjekt
         {
             // Get the position of the mouse click relative to the Canvas
             Point clickPosition = e.GetPosition(MyCanvas);
-            int index = 0;
-
-            //bilder.ForEach(image =>
-            //{
-            //    // Check if the click is within the bounds of this image
-            //    Image img = image.Image;
-            //    double x = Canvas.GetLeft(img);
-            //    double y = Canvas.GetTop(img);
-            //    Rect imageBounds = new Rect(x, y, img.Width, img.Height);
-
-            //    if((clickPosition.X > imageBounds.X && clickPosition.X < imageBounds.X + image.w) && (clickPosition.Y > imageBounds.Y && clickPosition.Y < imageBounds.Y + image.h))
-            //    {
-            //        Debug.WriteLine("Yapp");
-            //        image.gotClicked = true;    
-            //    }
-
-            //    //Debug.WriteLine($"X: {imageBounds.X}, Y: {imageBounds.Y}, W: {image.w} H: {image.h} --> ClickX: {clickPosition.X} ClickY: {clickPosition.Y}");
-            //});
-
 
             Image img = bilder[awaitedIndex].Image;
             double x = Canvas.GetLeft(img);
