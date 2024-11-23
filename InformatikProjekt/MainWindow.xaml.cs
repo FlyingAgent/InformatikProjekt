@@ -23,7 +23,6 @@ namespace InformatikProjekt
     
     public partial class MainWindow : Window
     {
-        Button newButton = new Button();
         DispatcherTimer gameTimer = new DispatcherTimer();
         public List<Bild> bilder = new List<Bild>();
 
@@ -79,59 +78,6 @@ namespace InformatikProjekt
             }
         }
 
-        //private void spawnHandler()
-        //{
-        //    double newX = 0;
-        //    double newY = 0;
-        //    bool continueSearching = true;
-        //    while (continueSearching == true)
-        //    {
-        //        if(bilder.Count == 0)
-        //        {
-        //            continueSearching = false;
-        //        } else
-        //        {
-        //            Random random = new Random();
-        //            newX = random.Next(0, (int)w); // Beispiel: zufällige X-Koordinate
-        //            newY = random.Next(0, (int)h); // Beispiel: zufällige Y-Koordinate
-
-
-        //            double intersects = 0;
-        //            bilder.ForEach(b =>
-        //            {
-        //                Image img = b.Image;
-        //                double x = Canvas.GetLeft(img);
-        //                double y = Canvas.GetTop(img);
-        //                Rect imageBounds = new Rect(x - img.Width, y - img.Height, img.Width*2, img.Height*2);
-
-
-
-        //                Debug.WriteLine($"X: {newX}, PictureX: {x}, LeftLimit: {x - b.w}, RightLimit: {x + b.w}");
-        //                Debug.WriteLine($"Y: {newY}, PictureY: {y}, TopLimit: {y - b.h}, Bottomlimit: {y + b.h}");
-        //                if (newX > (x - b.w) && newX < (x + b.w) && newY > (y - b.h) && newY < (y + b.h))
-        //                {
-        //                    intersects++;
-        //                    Debug.WriteLine("   This is intersecting!");
-        //                }
-        //            });
-
-        //            if (intersects == 0)
-        //            {
-        //                continueSearching = false;
-        //            }
-        //        }
-
-        //    }
-        //    // Zufällige neue Position berechnen (z.B. innerhalb eines Bereichs)
-
-
-        //    Image thisImage = AddImageToGrid(newX, newY);
-        //    //await Task.Delay(time);
-        //    //removeImage(thisImage);
-        //}
-
-
-
 
         private Image AddImageToGrid(double x, double y)
         {
@@ -143,7 +89,6 @@ namespace InformatikProjekt
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
             bitmap.UriSource = new Uri("C:/Users/joost/Downloads/IMG20231211194334.jpg", UriKind.Absolute); // Absoluter oder relativer Pfad
-            
             bitmap.EndInit();
 
             // Weise die Quelle dem Image-Steuerelement zu
@@ -157,7 +102,6 @@ namespace InformatikProjekt
             // Füge das Image zum Grid hinzu
             MyCanvas.Children.Add(imageControl);
 
-            Debug.WriteLine("Test");
             bilder.Add(new Bild { Image = imageControl, h = (double)bitmap.PixelHeight * scale, w = (double)bitmap.PixelWidth * scale });
             return imageControl;
             
