@@ -87,19 +87,14 @@ namespace InformatikProjekt
                     b.gotClicked = false;
                 });
 
-                // Zufällige neue Position berechnen (z.B. innerhalb eines Bereichs)
-                Random random = new Random();
-                double newX = random.Next(0, (int)w); // Beispiel: zufällige X-Koordinate
-                double newY = random.Next(0, (int)h); // Beispiel: zufällige Y-Koordinate
-
-                Image thisImage = AddImageToGrid(newX, newY);
+                Image thisImage = AddImageToGrid();
                 await Task.Delay(time);
                 removeImage(thisImage);
             }
         }
 
 
-        private Image AddImageToGrid(double x, double y)
+        private Image AddImageToGrid()
         {
             // Erstelle ein Image-Steuerelement
             Image imageControl = new Image();
@@ -108,7 +103,7 @@ namespace InformatikProjekt
             // Erstelle eine BitmapImage-Quelle
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri("C:/Users/david/OneDrive/Bilder/IMG-20231002-WA0005.jpg", UriKind.Absolute); // Absoluter oder relativer Pfad
+            bitmap.UriSource = new Uri("C:/Users/joost/Downloads/IMG-20231002-WA0005.jpg", UriKind.Absolute); // Absoluter oder relativer Pfad
             bitmap.EndInit();
 
             // Weise die Quelle dem Image-Steuerelement zu
@@ -116,8 +111,12 @@ namespace InformatikProjekt
             ScaleTransform scaleTransform = new ScaleTransform(scale, scale);
             imageControl.RenderTransform = scaleTransform;
 
-            Canvas.SetLeft(imageControl, x);
-            Canvas.SetTop(imageControl, y);
+            Random random = new Random();
+            double newX = random.Next(0, (int)(w - (bitmap.PixelWidth * scale))); // Beispiel: zufällige X-Koordinate
+            double newY = random.Next(0, (int)(h - (bitmap.PixelHeight * scale))); // Beispiel: zufällige Y-Koordinate
+
+            Canvas.SetLeft(imageControl, newX);
+            Canvas.SetTop(imageControl, newY);
 
             // Füge das Image zum Grid hinzu
             MyCanvas.Children.Add(imageControl);
@@ -146,6 +145,8 @@ namespace InformatikProjekt
 
             if ((clickPosition.X > imageBounds.X && clickPosition.X < imageBounds.X + bilder[awaitedIndex].w) && (clickPosition.Y > imageBounds.Y && clickPosition.Y < imageBounds.Y + bilder[awaitedIndex].h))
             {
+                spawnAndDespawn(img);
+
                 Debug.WriteLine("Yapp");
                 bilder[awaitedIndex].gotClicked = true;
                 if (awaitedIndex + 1 < bilder.Count)
@@ -163,6 +164,13 @@ namespace InformatikProjekt
                 MessageBox.Show("Nö du huen");
                 gameTimer.Stop();
             }
+        }
+
+        private async void spawnAndDespawn(Image img)
+        {
+            MyCanvas.Children.Add(img);
+            await Task.Delay(1000);
+            MyCanvas.Children.Remove(img);
         }
 
         public int listForIndex(List<Bild> liste)
