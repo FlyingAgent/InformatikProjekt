@@ -42,7 +42,7 @@ namespace InformatikProjekt
             gameTimer.Interval = TimeSpan.FromMilliseconds(time + 16.66);
             startGame();
 
-            this.Background = new SolidColorBrush(Colors.Green);
+            this.Background = new SolidColorBrush(Colors.LightSlateGray);
             this.Width = w;
             this.Height = h;
 
@@ -150,7 +150,6 @@ namespace InformatikProjekt
                 Debug.WriteLine("Yapp");
                 bilder[awaitedIndex].gotClicked = true;
                 if (awaitedIndex + 1 < bilder.Count)
-                
                 {
                     awaitedIndex++;
                 } 
