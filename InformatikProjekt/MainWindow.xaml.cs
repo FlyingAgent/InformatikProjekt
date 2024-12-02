@@ -26,6 +26,7 @@ namespace InformatikProjekt
     {
         DispatcherTimer gameTimer = new DispatcherTimer();
         public List<Bild> bilder = new List<Bild>();
+        public List<Position> positionen = new List<Position>();
 
         public double w = 1000;
         public double h = 1000;
@@ -33,9 +34,12 @@ namespace InformatikProjekt
         public double scale = 0.3;
         public TextBox Punktebox;
         public int Punkte = 0;
+        
 
         public MainWindow()
         {
+
+            
             InitializeComponent();
 
             gameTimer.Tick += gameEngine; // link the timer tick to the game engine event
@@ -58,15 +62,28 @@ namespace InformatikProjekt
             Punktebox.Background = new SolidColorBrush(Colors.LightBlue);
             Canvas.SetLeft(Punktebox, w / 2 - 100);
             MyCanvas.Children.Add(Punktebox);
-            
+
+            //
+            positionGenerator();
+            positionen.ForEach(p => {
+                Rectangle Rechteck = new Rectangle
+                {
+                    Width = 150,
+                    Height = 150,
+                    Fill = new SolidColorBrush(Colors.Red)
+                };
+
+                Canvas.SetLeft(Rechteck, p.x);
+                Canvas.SetTop(Rechteck, p.y);
+                MyCanvas.Children.Add(Rechteck);
+            });
         }
             
         private void startGame()
         {
             gameTimer.Start();
         }
-
-
+        
 
         private async void gameEngine(object sender, EventArgs e)
         {
@@ -94,7 +111,8 @@ namespace InformatikProjekt
                 Image thisImage = AddImageToGrid(newX, newY);
                 await Task.Delay(time);
                 removeImage(thisImage);
-            }
+             }
+            Punktebox.Text = $"Punkte: {Punkte}";
         }
 
 
@@ -138,23 +156,6 @@ namespace InformatikProjekt
             Point clickPosition = e.GetPosition(MyCanvas);
             int index = 0;
 
-            //bilder.ForEach(image =>
-            //{
-            //    // Check if the click is within the bounds of this image
-            //    Image img = image.Image;
-            //    double x = Canvas.GetLeft(img);
-            //    double y = Canvas.GetTop(img);
-            //    Rect imageBounds = new Rect(x, y, img.Width, img.Height);
-
-            //    if((clickPosition.X > imageBounds.X && clickPosition.X < imageBounds.X + image.w) && (clickPosition.Y > imageBounds.Y && clickPosition.Y < imageBounds.Y + image.h))
-            //    {
-            //        Debug.WriteLine("Yapp");
-            //        image.gotClicked = true;    
-            //    }
-
-            //    //Debug.WriteLine($"X: {imageBounds.X}, Y: {imageBounds.Y}, W: {image.w} H: {image.h} --> ClickX: {clickPosition.X} ClickY: {clickPosition.Y}");
-            //});
-
 
             Image img = bilder[awaitedIndex].Image;
             double x = Canvas.GetLeft(img);
@@ -167,18 +168,18 @@ namespace InformatikProjekt
                 Debug.WriteLine("Yapp");
                 bilder[awaitedIndex].gotClicked = true;
                 if (awaitedIndex + 1 < bilder.Count)
-                
                 {
                     awaitedIndex++;
                 } 
                 else
                 {
                     awaitedIndex = 0;
+                    Punkte++;
                 }
             } 
             else
             {
-                MessageBox.Show("Nö du huen");
+                MessageBox.Show($"Versuche es noch mal! \nErziehlter score: {Punkte}");
                 gameTimer.Stop();
             }
         }
@@ -199,8 +200,22 @@ namespace InformatikProjekt
 
             return outPutIndex;
         }
+        public void positionGenerator()
+        {
+            int AnzahlPunkteX = 4;
+            int AnzahlPunkteY = 4;
+            int Punkktegesamt = AnzahlPunkteX * AnzahlPunkteY;
 
+            for (int i = 0; i < AnzahlPunkteY; i++) {
+                for (int j = 0; j < AnzahlPunkteX; j++) {
+                    positionen.Add(new Position { x = 115+i*200 , y = 115+j*200 }); 
+                }
+                
+            }
+        }
+        
     }
+
 
     public class Bild
     {
@@ -211,4 +226,10 @@ namespace InformatikProjekt
         public bool gotClicked = false;
 
     }
-}
+    
+    public class Position
+    {
+        public int x = 0;
+        public int y = 0;
+    }
+}   
