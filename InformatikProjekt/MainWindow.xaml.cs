@@ -1,28 +1,12 @@
-﻿using System;
-using System.Diagnostics;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Diagnostics;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Converters;
-using System.Security.Cryptography.X509Certificates;
+
 
 namespace InformatikProjekt
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    
-    public partial class MainWindow : Window
+{   
+    public partial class MainWindow
     {
         DispatcherTimer gameTimer = new DispatcherTimer();
         public List<Bild> bilder = new List<Bild>();
@@ -34,6 +18,7 @@ namespace InformatikProjekt
         public TextBox Punktebox;
         public TextBox Highscorebox;
         public int Punkte = 0;
+        public int awaitedIndex = 0;
 
         public MainWindow()
         {
@@ -41,7 +26,7 @@ namespace InformatikProjekt
 
             gameTimer.Tick += gameEngine; // link the timer tick to the game engine event
             gameTimer.Interval = TimeSpan.FromMilliseconds(time + 16.66);
-            startGame();
+            InformatikProjekt.gameEngine.startGame(gameTimer);
 
             this.Background = new SolidColorBrush(Colors.LightSlateGray);
             this.Width = w;
@@ -50,149 +35,17 @@ namespace InformatikProjekt
             Boxerstellung.Punkteboxerstellung(Punktebox, MyCanvas, Punkte, w);
             Boxerstellung.Highscoreboxerstellung(Highscorebox, MyCanvas, Punkte, w);
         }
-            
-        private void startGame()
-        {
-            gameTimer.Start();
-        }
-
-
 
         private async void gameEngine(object sender, EventArgs e)
         {
-            bool allPicturesClicked = true;
-            bilder.ForEach(b =>
-            {
-                if (b.gotClicked == false)
-                {
-                    allPicturesClicked = false;
-                }
-            });
-
-            if (allPicturesClicked == true)
-            {
-                //Bild spawnen
-                bilder.ForEach(b =>
-                {
-                    b.gotClicked = false;
-                });
-
-                Image thisImage = AddImageToGrid();
-                await Task.Delay(time);
-                removeImage(thisImage);
-            }
+            InformatikProjekt.gameEngine.Execute(bilder, time, MyCanvas, scale, w, h);
         }
 
-
-        private Image AddImageToGrid()
-        {
-            // Erstelle ein Image-Steuerelement
-            Image imageControl = new Image();
-            
-
-            // Erstelle eine BitmapImage-Quelle
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.UriSource = new Uri("C:/Users/joost/Downloads/IMG-20231002-WA0005.jpg", UriKind.Absolute); // Absoluter oder relativer Pfad
-            bitmap.EndInit();
-
-            // Weise die Quelle dem Image-Steuerelement zu
-            imageControl.Source = bitmap;
-            ScaleTransform scaleTransform = new ScaleTransform(scale, scale);
-            imageControl.RenderTransform = scaleTransform;
-
-            Random random = new Random();
-            double newX = random.Next(0, (int)(w - (bitmap.PixelWidth * scale))); // Beispiel: zufällige X-Koordinate
-            double newY = random.Next(0, (int)(h - (bitmap.PixelHeight * scale))); // Beispiel: zufällige Y-Koordinate
-
-            Canvas.SetLeft(imageControl, newX);
-            Canvas.SetTop(imageControl, newY);
-
-            // Füge das Image zum Grid hinzu
-            MyCanvas.Children.Add(imageControl);
-
-            bilder.Add(new Bild { Image = imageControl, h = (double)bitmap.PixelHeight * scale, w = (double)bitmap.PixelWidth * scale });
-            return imageControl;
-            
-        }
-
-        private void removeImage(Image i)
-        {
-            MyCanvas.Children.Remove(i);
-        }
-
-        public int awaitedIndex = 0;
+        
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Get the position of the mouse click relative to the Canvas
-            Point clickPosition = e.GetPosition(MyCanvas);
-
-            Image img = bilder[awaitedIndex].Image;
-            double x = Canvas.GetLeft(img);
-            double y = Canvas.GetTop(img);
-            Rect imageBounds = new Rect(x, y, img.Width, img.Height);
-            
-
-            if ((clickPosition.X > imageBounds.X && clickPosition.X < imageBounds.X + bilder[awaitedIndex].w) && (clickPosition.Y > imageBounds.Y && clickPosition.Y < imageBounds.Y + bilder[awaitedIndex].h))
-            {
-                spawnAndDespawn(img);
-
-                Debug.WriteLine("Yapp");
-                bilder[awaitedIndex].gotClicked = true;
-                if (awaitedIndex + 1 < bilder.Count)
-                {
-                    awaitedIndex++;
-                } 
-                else
-                {
-                    awaitedIndex = 0;
-                }
-            } 
-            else
-            {
-                MessageBox.Show("Nö du huen");
-
-                //Entfehrnene aller Bilder von dem Canvas
-                bilder.ForEach(bild => {
-                    MyCanvas.Children.Remove(bild.Image);
-                });
-                gameTimer.Stop();
-            }
+            GetMouseClick.Mausklick(MyCanvas, e, bilder, ref awaitedIndex, gameTimer);
         }
-
-        private async void spawnAndDespawn(Image img)
-        {
-            MyCanvas.Children.Add(img);
-            await Task.Delay(1000);
-            MyCanvas.Children.Remove(img);
-        }
-
-        public int listForIndex(List<Bild> liste)
-        {
-            int index = 0;
-            int outPutIndex = 0;
-
-            liste.ForEach(b =>
-            {
-                 index++;
-                 if (b.gotClicked == true)
-                 {
-                     outPutIndex = index;
-                 }
-            });
-
-            return outPutIndex;
-        }
-
     }
 
-    public class Bild
-    {
-        public double h { get; set; }
-        public double w { get; set; }
-        public Image Image { get; set; }
-
-        public bool gotClicked = false;
-
-    }
 }
