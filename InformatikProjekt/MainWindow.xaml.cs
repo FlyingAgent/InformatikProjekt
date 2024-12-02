@@ -32,6 +32,7 @@ namespace InformatikProjekt
         public int time = 1000;
         public double scale = 0.3;
         public TextBox Punktebox;
+        public TextBox Highscorebox;
         public int Punkte = 0;
 
         public MainWindow()
@@ -46,19 +47,8 @@ namespace InformatikProjekt
             this.Width = w;
             this.Height = h;
 
-            //einbauen der Punkte
-            Punktebox = new TextBox
-            {
-                Width = 200,
-                Height = 30,
-                Text = $"Punkte: {Punkte}",
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Top
-            };
-            Punktebox.Background = new SolidColorBrush(Colors.LightBlue);
-            Canvas.SetLeft(Punktebox, w / 2 - 100);
-            MyCanvas.Children.Add(Punktebox);
-            
+            Boxerstellung.Punkteboxerstellung(Punktebox, MyCanvas, Punkte, w);
+            Boxerstellung.Highscoreboxerstellung(Highscorebox, MyCanvas, Punkte, w);
         }
             
         private void startGame()
@@ -161,6 +151,11 @@ namespace InformatikProjekt
             else
             {
                 MessageBox.Show("Nö du huen");
+
+                //Entfehrnene aller Bilder von dem Canvas
+                bilder.ForEach(bild => {
+                    MyCanvas.Children.Remove(bild.Image);
+                });
                 gameTimer.Stop();
             }
         }
