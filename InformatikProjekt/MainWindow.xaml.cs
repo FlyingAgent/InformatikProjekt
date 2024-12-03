@@ -63,7 +63,7 @@ namespace InformatikProjekt
             Canvas.SetLeft(Punktebox, w / 2 - 100);
             MyCanvas.Children.Add(Punktebox);
 
-            //
+            //Erstellen der Quadrate und platzierung in den Canvas
             positionGenerator();
             positionen.ForEach(p => {
                 Rectangle Rechteck = new Rectangle
@@ -103,10 +103,11 @@ namespace InformatikProjekt
                     b.gotClicked = false;
                 });
 
-                // Zufällige neue Position berechnen (z.B. innerhalb eines Bereichs)
+                // Zufällige Position in dem 4x4 Raster
                 Random random = new Random();
-                double newX = random.Next(0, (int)w); // Beispiel: zufällige X-Koordinate
-                double newY = random.Next(0, (int)h); // Beispiel: zufällige Y-Koordinate
+                int index = random.Next(0, positionen.Count);
+                double newX = positionen[index].x;
+                double newY = positionen[index].y;
 
                 Image thisImage = AddImageToGrid(newX, newY);
                 await Task.Delay(time);
@@ -200,6 +201,7 @@ namespace InformatikProjekt
 
             return outPutIndex;
         }
+        //Erstellen der Postionen des 4x4 Raster 
         public void positionGenerator()
         {
             int AnzahlPunkteX = 4;
