@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace InformatikProjekt
 {
     class Imagecontrol
     {
+        public static List<Position> positions = InformatikProjekt.MainWindow.positionen;
         public static Image AddImageToGrid(Canvas MyCanvas, double scale, double w, double h, List<Bild> bilder)
         {
             // Erstelle ein Image-Steuerelement
@@ -20,7 +22,8 @@ namespace InformatikProjekt
             // Erstelle eine BitmapImage-Quelle
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri("C:/Users/joost/Downloads/IMG-20231002-WA0005.jpg", UriKind.Absolute); // Absoluter oder relativer Pfad
+            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheresmall.PNG");
+            bitmap.UriSource = new Uri(imagePath, UriKind.Absolute); // Absoluter oder relativer Pfad
             bitmap.EndInit();
 
             // Weise die Quelle dem Image-Steuerelement zu
@@ -29,8 +32,11 @@ namespace InformatikProjekt
             imageControl.RenderTransform = scaleTransform;
 
             Random random = new Random();
-            double newX = random.Next(0, (int)(w - (bitmap.PixelWidth * scale))); // Beispiel: zufällige X-Koordinate
-            double newY = random.Next(0, (int)(h - (bitmap.PixelHeight * scale))); // Beispiel: zufällige Y-Koordinate
+
+            int index = random.Next(0, positions.Count);
+            double newX = positions[index].x;
+            double newY = positions[index].y;
+
 
             Canvas.SetLeft(imageControl, newX);
             Canvas.SetTop(imageControl, newY);
@@ -50,9 +56,13 @@ namespace InformatikProjekt
 
         public static async void spawnAndDespawn(Image img, Canvas MyCanvas)
         {
-            MyCanvas.Children.Add(img);
-            await Task.Delay(1000);
-            MyCanvas.Children.Remove(img);
+            if (!MyCanvas.Children.Contains(img))
+            {
+                MyCanvas.Children.Add(img);
+                await Task.Delay(1000);
+                MyCanvas.Children.Remove(img);
+            }
         }
+
     }
 }

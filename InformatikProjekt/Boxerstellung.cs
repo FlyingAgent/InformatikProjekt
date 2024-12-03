@@ -11,7 +11,7 @@ namespace InformatikProjekt
 {
     public class Boxerstellung()
     {
-        public static void Punkteboxerstellung(TextBox Punktebox, Canvas MyCanvas, int Punkte, double w)
+        public static void Punkteboxerstellung(ref TextBox Punktebox, Canvas MyCanvas, int Punkte, double w)
         {
             Punktebox = new TextBox
             {
@@ -27,7 +27,7 @@ namespace InformatikProjekt
             MyCanvas.Children.Add(Punktebox);
         }
 
-        public static void Highscoreboxerstellung(TextBox Highscorebox, Canvas MyCanvas, int Punkte, double w)
+        public static void Highscoreboxerstellung(ref TextBox Highscorebox, Canvas MyCanvas, int Punkte, double w)
         {
             Highscorebox = new TextBox
             {
@@ -41,6 +41,26 @@ namespace InformatikProjekt
             Highscorebox.Background = new SolidColorBrush(Colors.LightBlue);
             Canvas.SetLeft(Highscorebox, w / 2);
             MyCanvas.Children.Add(Highscorebox);
+        }
+
+        public static void gameOverBox(Canvas myCanvas)
+        {
+            TextBox box = new TextBox
+            {
+                Width = 400,
+                Height = 150,
+                Text = "Game over du Huen",
+                IsEnabled = false,
+                FontSize = 20,
+                TextAlignment = TextAlignment.Center,
+                VerticalContentAlignment= VerticalAlignment.Center,
+                Background = new SolidColorBrush(Colors.IndianRed),
+                FontFamily = new FontFamily("Aharoni"),
+                FontWeight = FontWeights.Bold
+            };
+            Canvas.SetLeft(box, 500 - box.Width/2);
+            Canvas.SetTop(box, 400 - box.Height/2);
+            myCanvas.Children.Add(box);
         }
     }
 }

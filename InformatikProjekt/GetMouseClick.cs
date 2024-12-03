@@ -13,11 +13,15 @@ namespace InformatikProjekt
 {
     class GetMouseClick
     {
-        public static void Mausklick(Canvas MyCanvas, MouseButtonEventArgs e, List<Bild> bilder, ref int awaitedIndex, DispatcherTimer gameTimer)
+        public static void Mausklick(Canvas MyCanvas, MouseButtonEventArgs e, List<Bild> bilder, ref int awaitedIndex, DispatcherTimer gameTimer, ref int Punkte)
         {
             // Get the position of the mouse click relative to the Canvas
             Point clickPosition = e.GetPosition(MyCanvas);
 
+            if (bilder.Count < 1)
+            {
+                return;
+            }
             Image img = bilder[awaitedIndex].Image;
             double x = Canvas.GetLeft(img);
             double y = Canvas.GetTop(img);
@@ -37,17 +41,20 @@ namespace InformatikProjekt
                 else
                 {
                     awaitedIndex = 0;
+                    Punkte++;
                 }
             }
             else
             {
-                MessageBox.Show("Nö du huen");
 
                 //Entfehrnene aller Bilder von dem Canvas
                 bilder.ForEach(bild => {
                     MyCanvas.Children.Remove(bild.Image);
                 });
+                bilder.Clear();
                 gameTimer.Stop();
+
+                Boxerstellung.gameOverBox(MyCanvas);
             }
         }
     }
