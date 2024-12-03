@@ -8,4 +8,18 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="guitar-electro-sport-trailer-115571.wav" />
+    <None Remove="scheresmall.PNG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="guitar-electro-sport-trailer-115571.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scheresmall.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
