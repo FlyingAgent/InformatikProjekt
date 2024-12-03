@@ -8,6 +8,8 @@ namespace InformatikProjekt
 {   
     public partial class MainWindow
     {
+        //Schwierigkeit: Brainrot/Intermediate/Brainwarrior
+        public static string difficulty = "brainwarrior";
         DispatcherTimer gameTimer = new DispatcherTimer();
         public List<Bild> bilder = new List<Bild>();
         public static List<Position> positionen = new List<Position>();
@@ -16,11 +18,11 @@ namespace InformatikProjekt
         public double h = 1000;
         public int time = 1000;
         public double scale = 1;
-        public TextBox Punktebox;
+        public static TextBox Punktebox;
         public TextBox Highscorebox;
-        public int Punkte = 0;
+        public static int Punkte = 0;
         public int Highscore = 0;
-        public int awaitedIndex = 0;
+        public static int awaitedIndex = 0;
 
         public MainWindow()
         {
@@ -36,15 +38,12 @@ namespace InformatikProjekt
 
             Boxerstellung.Punkteboxerstellung(ref Punktebox, MyCanvas, Punkte, w);
             Boxerstellung.Highscoreboxerstellung(ref Highscorebox, MyCanvas, Punkte, w);
-
-            
-            
         }
 
 
         private void gameEngine(object sender, EventArgs e)
         {
-            InformatikProjekt.gameEngine.Execute(bilder, time, MyCanvas, scale, w, h);
+            InformatikProjekt.gameEngine.Execute(bilder, time, MyCanvas, scale, w, h, Punkte);
             Score.ScoreUpdate(Punktebox, Punkte, MyCanvas);
             
         }
@@ -54,6 +53,13 @@ namespace InformatikProjekt
         {
             GetMouseClick.Mausklick(MyCanvas, e, bilder, ref awaitedIndex, gameTimer, ref Punkte, ref Highscore, ref Highscorebox);
         }
+
+        public void ResetPoints()
+        {
+            Punkte = 0;
+        }
     }
 
 }
+
+//To-Do: Count Down erstellen, Schwierigkeitsgrad --> Verringerung der Zeit bei fortgeschrittener Punktzahl

@@ -11,7 +11,7 @@ namespace InformatikProjekt
 {
     class gameEngine
     {
-        public async static void Execute(List<Bild> bilder, int time, Canvas MyCanvas, double scale, double w, double h)
+        public async static void Execute(List<Bild> bilder, int time, Canvas MyCanvas, double scale, double w, double h, int score)
         {
             bool allPicturesClicked = true;
             bilder.ForEach(b =>
@@ -32,7 +32,21 @@ namespace InformatikProjekt
 
                 //Image thisImage = AddImageToGrid();
                 Image thisImage = Imagecontrol.AddImageToGrid(MyCanvas, scale, w, h, bilder);
-                await Task.Delay(time);
+                int diffFactor = 0;
+                if(MainWindow.difficulty == "brainrot")
+                {
+                    diffFactor = 1;
+                } else if (MainWindow.difficulty == "intermediate")
+                {
+                    diffFactor = 3;
+
+                } else if (MainWindow.difficulty == "brainwarrior")
+                {
+                    diffFactor = 8;
+                }
+                double duration = time - score * diffFactor * 40;
+                if (duration < 0) duration = 50;
+                await Task.Delay((int)duration);
                 Imagecontrol.removeImage(thisImage, MyCanvas);
             }
         }
@@ -42,7 +56,7 @@ namespace InformatikProjekt
             Music.StopLoopingMusic();
             RemoveBoxes rb = new RemoveBoxes();
             rb.Remove(MyCanvas);
-
+            //Zurücksetzen der Punktzahl bei mehreren Runden hintereinander
             List<Position> positionen = MainWindow.positionen;
             Positiongenerator.Fieldgeneration(positionen, MyCanvas);
             Music.PlayLoopingMusic();

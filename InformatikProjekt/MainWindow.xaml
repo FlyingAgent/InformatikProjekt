@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InformatikProjekt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="Auto" Width="Auto" MouseDown="Window_MouseDown">
+        Title="MemoryGym" Height="Auto" Width="Auto" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Canvas x:Name="MyCanvas">
     </Canvas>
     

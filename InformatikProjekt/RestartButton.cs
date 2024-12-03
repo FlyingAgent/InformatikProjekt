@@ -44,8 +44,9 @@ namespace InformatikProjekt
         {
             //MessageBox.Show("Button wurde geklickt!");
             Canvas.Children.Remove(myButton);
-
-            
+            MainWindow.Punkte = 0;
+            Score.ScoreUpdate(MainWindow.Punktebox, MainWindow.Punkte, Canvas);
+            MainWindow.awaitedIndex = 0;
             gameEngine.startGame(timer, Canvas);
         }
     }
