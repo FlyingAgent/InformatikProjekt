@@ -16,5 +16,13 @@ namespace InformatikProjekt
                 box.Text = $"Punkte: {score}";
             }
         }
+
+        public static void HighScoreUpdate(TextBox box, int score, Canvas MyCanvas)
+        {
+            if (MyCanvas.Children.Contains(box))
+            {
+                box.Text = $"Highscore: {score}";
+            }
+        }
     }
 }

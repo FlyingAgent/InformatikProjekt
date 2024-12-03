@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace InformatikProjekt
@@ -36,8 +37,15 @@ namespace InformatikProjekt
             }
         }
 
-        public static void startGame(DispatcherTimer gameTimer)
+        public static void startGame(DispatcherTimer gameTimer, Canvas MyCanvas)
         {
+            Music.StopLoopingMusic();
+            RemoveBoxes rb = new RemoveBoxes();
+            rb.Remove(MyCanvas);
+
+            List<Position> positionen = MainWindow.positionen;
+            Positiongenerator.Fieldgeneration(positionen, MyCanvas);
+            Music.PlayLoopingMusic();
             gameTimer.Start();
         }
     }

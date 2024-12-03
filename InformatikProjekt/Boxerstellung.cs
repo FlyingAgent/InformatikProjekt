@@ -56,7 +56,8 @@ namespace InformatikProjekt
                 VerticalContentAlignment= VerticalAlignment.Center,
                 Background = new SolidColorBrush(Colors.IndianRed),
                 FontFamily = new FontFamily("Aharoni"),
-                FontWeight = FontWeights.Bold
+                FontWeight = FontWeights.Bold,
+                Tag = "over"
             };
             Canvas.SetLeft(box, 500 - box.Width/2);
             Canvas.SetTop(box, 400 - box.Height/2);

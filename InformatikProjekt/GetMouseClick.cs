@@ -13,7 +13,7 @@ namespace InformatikProjekt
 {
     class GetMouseClick
     {
-        public static void Mausklick(Canvas MyCanvas, MouseButtonEventArgs e, List<Bild> bilder, ref int awaitedIndex, DispatcherTimer gameTimer, ref int Punkte)
+        public static void Mausklick(Canvas MyCanvas, MouseButtonEventArgs e, List<Bild> bilder, ref int awaitedIndex, DispatcherTimer gameTimer, ref int Punkte, ref int Highscore, ref TextBox Highscorebox)
         {
             // Get the position of the mouse click relative to the Canvas
             Point clickPosition = e.GetPosition(MyCanvas);
@@ -52,9 +52,23 @@ namespace InformatikProjekt
                     MyCanvas.Children.Remove(bild.Image);
                 });
                 bilder.Clear();
+
+                // Liste für die Rechtecke, die entfernt werden sollen
+                var rectanglesToRemove = MyCanvas.Children.OfType<System.Windows.Shapes.Rectangle>().ToList();
+
+                // Entferne die Rechtecke
+                foreach (var rectangle in rectanglesToRemove)
+                {
+                    MyCanvas.Children.Remove(rectangle);
+                }
+
+                Highscore = Punkte;
+                Score.HighScoreUpdate(Highscorebox, Highscore, MyCanvas);
                 gameTimer.Stop();
 
                 Boxerstellung.gameOverBox(MyCanvas);
+                RestartButton  rB = new RestartButton();
+                rB.buttonCreate(MyCanvas, ref gameTimer);
             }
         }
     }

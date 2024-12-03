@@ -13,14 +13,18 @@ namespace InformatikProjekt
 {
     internal class Music
     {
-        static MediaPlayer player;
+        static MediaPlayer player = new MediaPlayer();
         public static void PlayLoopingMusic()
         {
             string musicPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "guitar-electro-sport-trailer-115571.wav");
-            player = new MediaPlayer();
             player.Open(new Uri(musicPath, UriKind.Relative));
             player.MediaEnded += (s, e) => player.Position = TimeSpan.Zero; // Wiederholung
             player.Play();
+        }
+
+        public static void StopLoopingMusic()
+        {
+            player.Stop();
         }
     }
 }
