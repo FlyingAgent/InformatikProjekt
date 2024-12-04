@@ -9,7 +9,7 @@ namespace InformatikProjekt
     public partial class MainWindow
     {
         //Schwierigkeit: Brainrot/Intermediate/Brainwarrior
-        public static string difficulty = "brainwarrior";
+        public static string difficulty = "brainrot";
         DispatcherTimer gameTimer = new DispatcherTimer();
         public List<Bild> bilder = new List<Bild>();
         public static List<Position> positionen = new List<Position>();
@@ -30,7 +30,9 @@ namespace InformatikProjekt
             positionen = Positiongenerator.PositionGenerator();
             gameTimer.Tick += gameEngine; // link the timer tick to the game engine event
             gameTimer.Interval = TimeSpan.FromMilliseconds(time + 16.66);
-            InformatikProjekt.gameEngine.startGame(gameTimer, MyCanvas);
+            //InformatikProjekt.gameEngine.startGame(gameTimer, MyCanvas);
+            StartButton sB = new StartButton();
+            sB.buttonCreate(MyCanvas, gameTimer);
 
             this.Background = new SolidColorBrush(Colors.LightSlateGray);
             this.Width = w;
@@ -63,3 +65,4 @@ namespace InformatikProjekt
 }
 
 //To-Do: Count Down erstellen, Schwierigkeitsgrad --> Verringerung der Zeit bei fortgeschrittener Punktzahl
+//Wenn alle Bilder angeklickt wurden (Klicksequenz beendet) dann sollen alle Bilder despawnen und dann das neue spawnen
