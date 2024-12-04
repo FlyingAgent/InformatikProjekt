@@ -14,10 +14,10 @@ namespace InformatikProjekt
         public List<Bild> bilder = new List<Bild>();
         public static List<Position> positionen = new List<Position>();
 
-        public double w = 1000;
-        public double h = 1000;
+        public static double w = 500;
+        public static double h = 500;
         public int time = 1000;
-        public double scale = 1;
+        public double scale = ((w+h)/2)/1000;
         public static TextBox Punktebox;
         public TextBox Highscorebox;
         public static int Punkte = 0;

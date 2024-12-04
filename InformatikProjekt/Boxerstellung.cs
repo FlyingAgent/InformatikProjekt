@@ -15,15 +15,15 @@ namespace InformatikProjekt
         {
             Punktebox = new TextBox
             {
-                Width = 200,
-                Height = 30,
+                Width = MainWindow.w * 0.2,
+                Height = MainWindow.h * 0.03,
                 Text = $"Punkte: {Punkte}",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Top,
                 IsEnabled = false
             };
             Punktebox.Background = new SolidColorBrush(Colors.LightBlue);
-            Canvas.SetLeft(Punktebox, w / 2 - 200);
+            Canvas.SetLeft(Punktebox, w / 2 - MainWindow.w * 0.2);
             MyCanvas.Children.Add(Punktebox);
         }
 
@@ -31,8 +31,8 @@ namespace InformatikProjekt
         {
             Highscorebox = new TextBox
             {
-                Width = 200,
-                Height = 30,
+                Width = MainWindow.w * 0.2,
+                Height = MainWindow.h * 0.03,
                 Text = $"Highsore: {Punkte}",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Top,
@@ -47,8 +47,8 @@ namespace InformatikProjekt
         {
             TextBox box = new TextBox
             {
-                Width = 400,
-                Height = 150,
+                Width = MainWindow.w * 0.4,
+                Height = MainWindow.h * 0.15,
                 Text = "Game over du Huen",
                 IsEnabled = false,
                 FontSize = 20,
@@ -59,8 +59,8 @@ namespace InformatikProjekt
                 FontWeight = FontWeights.Bold,
                 Tag = "over"
             };
-            Canvas.SetLeft(box, 500 - box.Width/2);
-            Canvas.SetTop(box, 400 - box.Height/2);
+            Canvas.SetLeft(box, MainWindow.w * 0.5 - box.Width/2);
+            Canvas.SetTop(box, MainWindow.h * 0.4 - box.Height/2);
             myCanvas.Children.Add(box);
         }
     }

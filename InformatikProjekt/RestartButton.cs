@@ -22,8 +22,8 @@ namespace InformatikProjekt
             myButton = new Button
             {
                 Content = "Restart",
-                Width = 200,
-                Height = 60,
+                Width = MainWindow.w * 0.2,
+                Height = MainWindow.h * 0.06,
                 Background = new SolidColorBrush(Colors.IndianRed),
                 FontFamily = new FontFamily("Aharoni"),
                 FontWeight = FontWeights.Bold,
@@ -31,8 +31,8 @@ namespace InformatikProjekt
                 VerticalAlignment = VerticalAlignment.Center
             };
 
-            Canvas.SetLeft(myButton, 500 - myButton.Width / 2);
-            Canvas.SetTop(myButton, 600 - myButton.Height / 2);
+            Canvas.SetLeft(myButton, MainWindow.w * 0.5 - myButton.Width / 2);
+            Canvas.SetTop(myButton, MainWindow.h * 0.6 - myButton.Height / 2);
 
             myButton.Click += MyButton_Click; // Ereignis verknüpfen
 

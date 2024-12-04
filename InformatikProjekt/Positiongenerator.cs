@@ -24,7 +24,7 @@ namespace InformatikProjekt
             {
                 for (int j = 0; j < AnzahlPunkteX; j++)
                 {
-                    positionen.Add(new Position { x = 115 + i * 200, y = 115 + j * 200 });
+                    positionen.Add(new Position { x = (int)(MainWindow.w * 0.115) + i * (int)(MainWindow.w * 0.2), y = (int)(MainWindow.h * 0.115) + j * (int)(MainWindow.h * 0.2) });
                 }
 
             }
@@ -37,8 +37,8 @@ namespace InformatikProjekt
             positionen.ForEach(p => {
                 Rectangle Rechteck = new Rectangle
                 {
-                    Width = 150,
-                    Height = 150,
+                    Width = MainWindow.w * 0.15,
+                    Height = MainWindow.h * 0.15,
                     Fill = new SolidColorBrush(Colors.DarkKhaki)
                 };
 
