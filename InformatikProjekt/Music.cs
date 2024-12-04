@@ -27,5 +27,13 @@ namespace InformatikProjekt
         {
             player.Stop();
         }
+
+        public void plopSound()
+        {
+            string musicPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "plop2.wav");
+            player.Open(new Uri(musicPath, UriKind.Relative));
+            player.Play();
+            player.Volume = 1;
+        }
     }
 }

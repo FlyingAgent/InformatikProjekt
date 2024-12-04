@@ -15,6 +15,9 @@ namespace InformatikProjekt
     {
         public static void Mausklick(Canvas MyCanvas, MouseButtonEventArgs e, List<Bild> bilder, ref int awaitedIndex, DispatcherTimer gameTimer, ref int Punkte, ref int Highscore, ref TextBox Highscorebox)
         {
+            Music music = new Music();
+            music.plopSound();
+
             // Get the position of the mouse click relative to the Canvas
             Point clickPosition = e.GetPosition(MyCanvas);
 
