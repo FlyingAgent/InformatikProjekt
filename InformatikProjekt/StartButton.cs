@@ -31,7 +31,7 @@ namespace InformatikProjekt
                 Width = 250,
                 Height = 100,
                 //Hintergrundfarbe
-                Background = new SolidColorBrush(Colors.IndianRed),
+                Background = new SolidColorBrush(Colors.LightGreen),
                 //Font
                 FontFamily = new FontFamily("Aharoni"),
                 FontWeight = FontWeights.Bold,

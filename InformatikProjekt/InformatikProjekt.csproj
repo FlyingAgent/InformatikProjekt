@@ -9,12 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="endsound.wav" />
     <None Remove="guitar-electro-sport-trailer-115571.wav" />
     <None Remove="plop2.wav" />
     <None Remove="scheresmall.PNG" />
+    <None Remove="ufo.png" />
+    <None Remove="ufo.tiff" />
+    <None Remove="ufo2.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="ufo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="endsound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="guitar-electro-sport-trailer-115571.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -22,6 +32,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="scheresmall.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ufo.tiff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ufo2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -28,12 +28,11 @@ namespace InformatikProjekt
             player.Stop();
         }
 
-        public void plopSound()
+        public void playSound(string sound)
         {
-            string musicPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "plop2.wav");
-            player.Open(new Uri(musicPath, UriKind.Relative));
-            player.Play();
-            player.Volume = 1;
+            SoundPlayer splayer = new SoundPlayer(sound);
+            splayer.Load(); // Optional: Lädt die Datei vorab für kürzere Wartezeiten
+            splayer.Play(); // Startet den Sound (asynchron)
         }
     }
 }

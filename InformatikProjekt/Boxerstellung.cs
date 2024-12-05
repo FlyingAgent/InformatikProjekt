@@ -43,13 +43,13 @@ namespace InformatikProjekt
             MyCanvas.Children.Add(Highscorebox);
         }
 
-        public static void gameOverBox(Canvas myCanvas)
+        public static void gameOverBox(Canvas myCanvas, int Punkte)
         {
             TextBox box = new TextBox
             {
                 Width = MainWindow.w * 0.4,
                 Height = MainWindow.h * 0.15,
-                Text = "Game over du Huen",
+                Text = $"Versuche es noch mal! \nErziehlter score: {Punkte}",
                 IsEnabled = false,
                 FontSize = 20,
                 TextAlignment = TextAlignment.Center,

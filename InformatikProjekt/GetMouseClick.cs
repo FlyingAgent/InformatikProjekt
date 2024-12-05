@@ -16,8 +16,7 @@ namespace InformatikProjekt
         public static void Mausklick(Canvas MyCanvas, MouseButtonEventArgs e, List<Bild> bilder, ref int awaitedIndex, DispatcherTimer gameTimer, ref int Punkte, ref int Highscore, ref TextBox Highscorebox)
         {
             Music music = new Music();
-            music.plopSound();
-
+            music.playSound("plop2.wav");
             // Get the position of the mouse click relative to the Canvas
             Point clickPosition = e.GetPosition(MyCanvas);
 
@@ -49,6 +48,9 @@ namespace InformatikProjekt
             }
             else
             {
+                //Abspielen von Endsound
+                Music endmusic = new Music();
+                endmusic.playSound("endsound.wav");
 
                 //Entfehrnene aller Bilder von dem Canvas
                 bilder.ForEach(bild => {
@@ -69,7 +71,7 @@ namespace InformatikProjekt
                 Score.HighScoreUpdate(Highscorebox, Highscore, MyCanvas);
                 gameTimer.Stop();
 
-                Boxerstellung.gameOverBox(MyCanvas);
+                Boxerstellung.gameOverBox(MyCanvas, Punkte);
                 RestartButton  rB = new RestartButton();
                 rB.buttonCreate(MyCanvas, ref gameTimer);
             }

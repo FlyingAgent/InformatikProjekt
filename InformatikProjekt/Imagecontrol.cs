@@ -22,7 +22,7 @@ namespace InformatikProjekt
             // Erstelle eine BitmapImage-Quelle
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheresmall.PNG");
+            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ufo2.png");
             bitmap.UriSource = new Uri(imagePath, UriKind.Absolute); // Absoluter oder relativer Pfad
             bitmap.EndInit();
 
