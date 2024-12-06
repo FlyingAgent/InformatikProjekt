@@ -41,6 +41,8 @@ namespace InformatikProjekt
                     Imagecontrol.removeImage(item.Image, MyCanvas);
                 }
 
+                await Task.Delay(300); //asynchroner Delay, damit Spieler sehen können, wo das neue Bild ist
+
                 //Neues Bild mithilfe von Methode erstellen
                 Image thisImage = Imagecontrol.AddImageToGrid(MyCanvas, scale, w, h, bilder);
 
