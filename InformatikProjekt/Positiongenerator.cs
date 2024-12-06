@@ -9,6 +9,7 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.IO;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace InformatikProjekt
 {
@@ -43,12 +44,26 @@ namespace InformatikProjekt
                     Fill = new SolidColorBrush(Colors.DarkKhaki)
                 };
 
-                string imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheresmall.png");
+                //Suche des Bildes in der Projektmappe, sodass es auch gefunden werden kann, wenn das Projekt geklont wird und keinen direkten Dateipfadverweis besitzt
+                string imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mond.png");
 
-                Rechteck.Fill = new ImageBrush
+                //Füllen des Rechtecks mit dem Bild
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute); // Absoluter oder relativer Pfad
+                bitmap.EndInit();
+
+
+                ImageBrush imageBrush = new ImageBrush
                 {
-                    ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Absolute))
+                    //Festlegen des Dateiverweises und Nutzbarmachung durch BitmapImage
+
+                    // Erstelle eine BitmapImage-Quelle
+                    ImageSource = bitmap
                 };
+
+                Rechteck.Fill = imageBrush;
 
                 Canvas.SetLeft(Rechteck, p.x);
                 Canvas.SetTop(Rechteck, p.y);

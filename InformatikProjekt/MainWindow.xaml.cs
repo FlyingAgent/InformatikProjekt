@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 
@@ -13,6 +14,7 @@ namespace InformatikProjekt
         DispatcherTimer gameTimer = new DispatcherTimer();
         public List<Bild> bilder = new List<Bild>();
         public static List<Position> positionen = new List<Position>();
+        public static bool registerClicks = false;
 
         public static double w = 1000;
         public static double h = 1000;
@@ -34,7 +36,24 @@ namespace InformatikProjekt
             StartButton sB = new StartButton();
             sB.buttonCreate(MyCanvas, gameTimer);
 
-            this.Background = new SolidColorBrush(Colors.LightSlateGray);
+            //Suche des Bildes in der Projektmappe, sodass es auch gefunden werden kann, wenn das Projekt geklont wird und keinen direkten Dateipfadverweis besitzt
+            string imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "void.png");
+
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(imagePath, UriKind.Absolute); // Absoluter oder relativer Pfad
+            bitmap.EndInit();
+
+
+            ImageBrush imageBrush = new ImageBrush
+            {
+                //Festlegen des Dateiverweises und Nutzbarmachung durch BitmapImage
+
+                // Erstelle eine BitmapImage-Quelle
+                ImageSource = bitmap
+            };
+
+            this.Background = imageBrush;
             this.Width = w;
             this.Height = h;
 

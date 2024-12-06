@@ -11,14 +11,19 @@
   <ItemGroup>
     <None Remove="endsound.wav" />
     <None Remove="guitar-electro-sport-trailer-115571.wav" />
+    <None Remove="mond.png" />
     <None Remove="plop2.wav" />
     <None Remove="scheresmall.PNG" />
     <None Remove="ufo.png" />
     <None Remove="ufo.tiff" />
     <None Remove="ufo2.png" />
+    <None Remove="void.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="mond.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ufo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -38,6 +43,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ufo2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="void.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -20,7 +20,7 @@ namespace InformatikProjekt
             player.Open(new Uri(musicPath, UriKind.Relative));
             player.MediaEnded += (s, e) => player.Position = TimeSpan.Zero; // Wiederholung
             player.Play();
-            player.Volume = 0.1;
+            player.Volume = 0.035;
         }
 
         public static void StopLoopingMusic()
