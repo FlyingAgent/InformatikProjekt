@@ -15,27 +15,32 @@ namespace InformatikProjekt
 {
     public class Positiongenerator
     {
+        //Es werden nun die Positionen in einer Liste festgelegt, auf denen die Bilder erscheinen sollen
+        //Methode, die eine Liste mit dem Datentyp der Positionen Klassen zurückgibt
         public static List<Position> PositionGenerator()
         {
+            //Anzahl der verschiedenen Positionen in x und y Richtung
             int AnzahlPunkteX = 4;
             int AnzahlPunkteY = 4;
-            int Punkktegesamt = AnzahlPunkteX * AnzahlPunkteY;
             List <Position> positionen = new List<Position>();
 
+            //verschachtelte for-Schleife für das 4x4 Feld
             for (int i = 0; i < AnzahlPunkteY; i++)
             {
                 for (int j = 0; j < AnzahlPunkteX; j++)
                 {
+                    //Die Positionen passen sich automatisch an die Größe des Spiels an
                     positionen.Add(new Position { x = (int)(MainWindow.w * 0.115) + i * (int)(MainWindow.w * 0.2), y = (int)(MainWindow.h * 0.115) + j * (int)(MainWindow.h * 0.2) });
                 }
 
             }
 
-            return positionen;
+            return positionen; //Rückgabe der neu erstellten Liste <-- Diese Methode ist vom Typ List<Position> und muss deshalb diesen Typ auch returnen
         }
 
         public static void Fieldgeneration(List<Position> positionen, Canvas MyCanvas)
         {
+            //Aufrufen der Positionen aus der Liste zum spawnen der Punkte
             positionen.ForEach(p => {
                 Rectangle Rechteck = new Rectangle
                 {
@@ -51,23 +56,21 @@ namespace InformatikProjekt
 
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
-                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute); // Absoluter oder relativer Pfad
+                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
                 bitmap.EndInit();
 
 
                 ImageBrush imageBrush = new ImageBrush
                 {
-                    //Festlegen des Dateiverweises und Nutzbarmachung durch BitmapImage
-
-                    // Erstelle eine BitmapImage-Quelle
-                    ImageSource = bitmap
+                    ImageSource = bitmap //Festlegen des Bildes in imageBrush
                 };
 
-                Rechteck.Fill = imageBrush;
+                Rechteck.Fill = imageBrush; //Anwenden des Bildes auf das Rechteck
 
+                //Koordinaten des neuen Rechtecks aus der Liste
                 Canvas.SetLeft(Rechteck, p.x);
                 Canvas.SetTop(Rechteck, p.y);
-                MyCanvas.Children.Add(Rechteck);
+                MyCanvas.Children.Add(Rechteck); //Hinzufügen des Rechtecks auf den Canvas
             });
         }
     }

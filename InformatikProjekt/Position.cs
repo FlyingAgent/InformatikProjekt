@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace InformatikProjekt
 {
+    //Koordinaten werden für die Liste Positionen deklariert
     public class Position
     {
         public int x = 0;

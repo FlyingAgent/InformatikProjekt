@@ -7,6 +7,7 @@ using System.Windows.Controls;
 
 namespace InformatikProjekt
 {
+    //Klasse Bild mit Höhe, Weite, Bild und Boolean, ob das Bild schon geklickt wurde
     public class Bild
     {
         public double h { get; set; }
