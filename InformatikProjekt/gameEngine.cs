@@ -31,6 +31,13 @@ namespace InformatikProjekt
                 });
 
                 //Image thisImage = AddImageToGrid();
+
+                //Entfehrnen aller aktuell noch angezeigten Ufos
+                foreach (var item in bilder)
+                {
+                    Imagecontrol.removeImage(item.Image, MyCanvas);
+                }
+
                 Image thisImage = Imagecontrol.AddImageToGrid(MyCanvas, scale, w, h, bilder);
                 int diffFactor = 0;
                 if(MainWindow.difficulty == "brainrot")

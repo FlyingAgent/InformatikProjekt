@@ -32,8 +32,11 @@ namespace InformatikProjekt
 
             if ((clickPosition.X > imageBounds.X && clickPosition.X < imageBounds.X + bilder[awaitedIndex].w) && (clickPosition.Y > imageBounds.Y && clickPosition.Y < imageBounds.Y + bilder[awaitedIndex].h))
             {
-                Imagecontrol.spawnAndDespawn(img, MyCanvas);
-
+                //Nur wenn das angeklickte Bild nicht auf dem Canvas ist, soll es erscheinen und kurz danach wieder entfernt werden
+                if (!MyCanvas.Children.Contains(img))
+                {
+                    Imagecontrol.spawnAndDespawn(img, MyCanvas);
+                }
                 Debug.WriteLine("Yapp");
                 bilder[awaitedIndex].gotClicked = true;
                 if (awaitedIndex + 1 < bilder.Count)
