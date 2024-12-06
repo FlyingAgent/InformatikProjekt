@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace InformatikProjekt
 {
@@ -40,6 +41,13 @@ namespace InformatikProjekt
                     Width = MainWindow.w * 0.15,
                     Height = MainWindow.h * 0.15,
                     Fill = new SolidColorBrush(Colors.DarkKhaki)
+                };
+
+                string imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheresmall.png");
+
+                Rechteck.Fill = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Absolute))
                 };
 
                 Canvas.SetLeft(Rechteck, p.x);
