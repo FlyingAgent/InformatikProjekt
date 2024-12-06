@@ -57,7 +57,7 @@ namespace InformatikProjekt
                 {
                     diffFactor = 8;
                 }
-                double duration = time - score * diffFactor * 40;
+                double duration = time - score * diffFactor * 20;
                 if (duration < 0) duration = 50;
                 await Task.Delay((int)duration); //Asynchroner Delay um den Mainthread nicht zu behindern
                 Imagecontrol.removeImage(thisImage, MyCanvas); //Bild wieder verdecken (vom Canvas entfernen)

@@ -55,8 +55,16 @@ namespace InformatikProjekt
         //Methode, die beim Anklicken aufgerufen wird
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            //Starten des Games
-            InformatikProjekt.gameEngine.startGame(gameTimer, Canvas);
+            //Erstellen der Buttons zur Festlegung der Schwierigkeit
+            DificultyBrainrot dificultyBrainrot = new DificultyBrainrot();
+            dificultyBrainrot.buttonCreate(Canvas, gameTimer);
+
+            Dificultyintermediate difficultyIntermediate = new Dificultyintermediate();
+            difficultyIntermediate.buttonCreate(Canvas, gameTimer);
+
+            DificultyBrainwarrior dificultyBrainwarrier = new DificultyBrainwarrior();
+            dificultyBrainwarrier.buttonCreate(Canvas, gameTimer);
+
             //Entfehrenen des Buttons vom Canvas
             Canvas.Children.Remove(myButton);
         }
